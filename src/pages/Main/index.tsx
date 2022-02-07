@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles.scss';
 import CardUsers from '../../components/CardUsers';
+import { useGlobalContext } from '../../hooks/context';
 
 const cardUsersData = [
   {
@@ -29,12 +30,14 @@ const cardUsersData = [
 ];
 
 const Main: React.FC = () => {
+  const { users } = useGlobalContext();
+
   return (
     <div className="wrapperMain">
       <main className="containerUsersAndPosts">
         <ul>
-          {cardUsersData.map((u) => (
-            <CardUsers user={u} />
+          {users.map((u) => (
+            <CardUsers key={u.id} user={u} />
           ))}
         </ul>
       </main>
