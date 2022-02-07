@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './styles.scss';
-import PostUser from '../PostUser';
+import PostUser from '../PostsUser';
 
 interface IUser {
   user: {
