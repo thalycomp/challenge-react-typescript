@@ -1,0 +1,23 @@
+.wrapperMain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+}
+
+.containerUsersAndPosts {
+  padding: 2rem;
+  width: 60%;
+
+  border-radius: 0.4rem;
+
+  ul {
+    width: 100%;
+    padding: 0;
+  }
+
+  @media (max-width: 720px) {
+    width: 80%;
+  }
+}
