@@ -1,34 +1,15 @@
 import React, { useState } from 'react';
 import './styles.scss';
-import PostUser from '../PostsUser';
 
-interface IUser {
-  user: {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    address: {
-      street: string;
-      suite: string;
-      city: string;
-      zipcode: number;
-      geo: {
-        lat: number;
-        lng: number;
-      };
-    };
-    phone: string;
-    website: string;
-    company: {
-      name: string;
-      catchPhrase: string;
-      bs: string;
-    };
-  };
+import PostUser from '../PostsUser';
+import { IUsers } from '../../types';
+
+interface ICardUsers {
+  user: IUsers;
+  key: number;
 }
 
-const CardUsers: React.FC<IUser> = (props: IUser) => {
+const CardUsers: React.FC<ICardUsers> = (props: ICardUsers) => {
   const [posts, setPosts] = useState(false);
 
   return (
@@ -52,7 +33,7 @@ const CardUsers: React.FC<IUser> = (props: IUser) => {
         </header>
         {posts && <PostUser id={props.user.id} />}
         <button className="buttonSeeMorePosts" onClick={() => setPosts(!posts)}>
-          See Posts
+          {posts ? 'See less' : 'See Posts'}
         </button>
       </article>
     </li>

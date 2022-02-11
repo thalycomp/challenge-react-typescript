@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useGlobalContext } from '../../hooks/context';
 import './styles.scss';
 
 interface IUserId {
@@ -6,37 +7,23 @@ interface IUserId {
 }
 
 const PostUser: React.FC<IUserId> = (props: IUserId) => {
-  const [posts, setPosts] = useState(false);
+  const { getPosts, posts } = useGlobalContext();
+
+  useEffect(() => {
+    async function fetchPosts() {
+      getPosts(props.id);
+    }
+    fetchPosts();
+  }, [getPosts, props.id]);
 
   return (
     <ul>
-      <li className="postItemPost">
-        <h3>qui est esse</h3>
-        <p>
-          est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae
-          ea dolores neque\nfugiat blanditiis voluptate porro vel nihil
-          molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque
-          nisi nulla
-        </p>
-      </li>
-      <li className="postItemPost">
-        <h3>qui est esse</h3>
-        <p>
-          est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae
-          ea dolores neque\nfugiat blanditiis voluptate porro vel nihil
-          molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque
-          nisi nulla
-        </p>
-      </li>
-      <li className="postItemPost">
-        <h3>qui est esse</h3>
-        <p>
-          est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae
-          ea dolores neque\nfugiat blanditiis voluptate porro vel nihil
-          molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque
-          nisi nulla
-        </p>
-      </li>
+      {posts.map((p) => (
+        <li key={p.id} className="postItemPost">
+          <h3>{p.title}</h3>
+          <p>{p.body}</p>
+        </li>
+      ))}
     </ul>
   );
 };
